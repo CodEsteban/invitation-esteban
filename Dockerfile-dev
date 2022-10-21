@@ -1,0 +1,11 @@
+FROM archlinux
+RUN pacman-key --init
+RUN pacman -Syu --noconfirm
+RUN pacman -S go --noconfirm
+
+RUN go install github.com/cosmtrek/air@latest
+ENV PATH="${PATH}:/root/go/bin"
+
+WORKDIR /usr/app/
+RUN air init
+CMD ["air"]
